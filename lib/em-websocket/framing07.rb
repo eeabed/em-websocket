@@ -106,6 +106,9 @@ module EventMachine
       end
       
       def send_frame(frame_type, application_data)
+        if frame_type == :binary
+          application_data.force_encoding("BINARY")
+        end
         debug [:sending_frame, frame_type, application_data]
 
         if @state == :closing && data_frame?(frame_type)
@@ -137,6 +140,10 @@ module EventMachine
 
       def send_text_frame(data)
         send_frame(:text, data)
+      end
+
+      def send_binary_frame(data)
+        send_frame(:binary, data)
       end
 
       private
