@@ -11,8 +11,8 @@ module EventMachine
       def onerror(&blk);    @onerror = blk;   end
       def onmessage(&blk);  @onmessage = blk; end
 
-      def trigger_on_message(msg)
-        @onmessage.call(msg) if @onmessage
+      def trigger_on_message(msg, type = :text)
+        @onmessage.call(msg, type) if @onmessage
       end
       def trigger_on_open
         @onopen.call if @onopen

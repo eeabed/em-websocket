@@ -87,7 +87,7 @@ module EventMachine
                 debug [:ignored_message, msg]
               else
                 msg.force_encoding('UTF-8') if msg.respond_to?(:force_encoding)
-                @connection.trigger_on_message(msg)
+                @connection.trigger_on_message(msg, frame_type)
               end
             else
               error = true
